@@ -25,12 +25,12 @@ class BrowsingController extends Controller
 
         foreach ($resultJuz as $row) {
             $data = $this->result($row->juz->getUri());
-            $title = substr($data, 0, 3);
-            $akhir = strlen($data) - strlen($title);
-            $angka = substr($data, -$akhir);
-            $susun = $title . ' ' . $angka;
+            // $title = substr($data, 0, 3);
+            // $akhir = strlen($data) - strlen($title);
+            // $angka = substr($data, -$akhir);
+            // $susun = $title . ' ' . $angka;
             array_push($dataJuz, [
-                'juz' => $susun
+                'juz' => $data
             ]);
         }
 
@@ -61,5 +61,36 @@ class BrowsingController extends Controller
             'golongan' => $dataGolongan,
         ];
         return view('browsing', $data);
+    }
+
+    public function browsing($kategori, $keyword)
+    {
+        if ($kategori == 'juz') {
+            $query = "SELECT ?surah WHERE { quran:$keyword quran:MengandungSurah ?surah .}";
+            $title = ' - Kategori Juz - ' . $keyword;
+        } elseif ($kategori == 'tema') {
+            $query = "SELECT ?surah WHERE {?surah quran:MengandungTema quran:$keyword}";
+            $title = ' - Kategori Tema - ' . $keyword;
+        } elseif ($kategori == 'golongan') {
+            $query = "SELECT ?surah WHERE {?surah quran:TermasukGolonganSurah quran:$keyword}";
+            $title = ' - Kategori Golongan - ' . $keyword;
+        }
+
+        $result = $this->sparql->query($query);
+        $dataResult = [];
+
+        foreach ($result as $row) {
+            array_push($dataResult, [
+                'surah' => $this->result($row->surah->getUri()),
+            ]);
+        }
+
+        $data = [
+            'title' => 'Browsing Result' . $title,
+            'result' => $dataResult,
+            'query' => $query,
+        ];
+
+        return view('browsing_result', $data);
     }
 }

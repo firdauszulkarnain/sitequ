@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DashboardController::class, 'index']);
 
 Route::get('/browsing', [BrowsingController::class, 'index']);
+Route::get('/browsing/{name}/{any}', [BrowsingController::class, 'browsing']);
+
 
 Route::get('/searching', function () {
     return view('searching');
