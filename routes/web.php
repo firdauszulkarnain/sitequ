@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrowsingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SurahController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,10 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DashboardController::class, 'index']);
-
 Route::get('/browsing', [BrowsingController::class, 'index']);
 Route::get('/browsing/{name}/{any}', [BrowsingController::class, 'browsing']);
-
+Route::get('/surah/detail/{any}', [SurahController::class, 'detail']);
 
 Route::get('/searching', function () {
     return view('searching');

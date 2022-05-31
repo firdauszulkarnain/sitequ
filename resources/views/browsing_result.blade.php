@@ -12,16 +12,18 @@
 
         <section class="content">
             <div class="row">
-                <div class="col-lg-10">
-                    <div class="card">
-                        <div class="card-body">
-                            @foreach ($result as $item)
-                                <li><a href="/surah/detail/{{ $item['surah'] }}">{{ $item['surah'] }}</a>
-                                </li>
-                            @endforeach
+                @foreach ($result as $item)
+                    <div class="col-lg-2">
+                        <div class="card shadow-sm rounded ">
+                            <div class="card-body">
+                                <a class="text-decoration-none text-dark font-weight-bolder">{{ $item['surah'] }}</a>
+                                <a href="/surah/detail/{{ $item['surah'] }}"
+                                    class="btn btn-sm btn-info float-right rounded-circle shadow-sm rounded"><i
+                                        class="fas fa-search"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
 
             <div class="row">

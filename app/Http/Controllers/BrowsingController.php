@@ -66,7 +66,7 @@ class BrowsingController extends Controller
     public function browsing($kategori, $keyword)
     {
         if ($kategori == 'juz') {
-            $query = "SELECT ?surah WHERE { quran:$keyword quran:MengandungSurah ?surah .}";
+            $query = "SELECT * WHERE { quran:$keyword quran:MengandungSurah ?surah .}";
             $title = ' - Kategori Juz - ' . $keyword;
         } elseif ($kategori == 'tema') {
             $query = "SELECT ?surah WHERE {?surah quran:MengandungTema quran:$keyword}";
