@@ -15,7 +15,7 @@ class HomeController extends Controller
 
         foreach ($quran as $row) {
             array_push($result, [
-                'nama_surah' => $this->parseData($row->surah->getUri())
+                'nama_surah' => $this->result($row->surah->getUri())
             ]);
         }
         $data = [

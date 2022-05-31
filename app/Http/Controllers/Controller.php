@@ -25,7 +25,7 @@ class Controller extends BaseController
         $this->sparql = new Client('http://localhost:3030/quran/query');
     }
 
-    public function parseData($string)
+    public function result($string)
     {
         return str_replace('http://www.semanticweb.org/Quran#', '', $string);
     }

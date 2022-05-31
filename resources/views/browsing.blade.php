@@ -18,7 +18,43 @@
                         <div class="card-body">
                             <ul>
                                 @foreach ($juz as $item)
-                                    <li><a href=""></a>{{ $item['juz'] }}</li>
+                                    <li><a href="/browsing/{{ $item['juz'] }}">{{ $item['juz'] }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <h5 class="card-header">Browsing - Tema Quran</h5>
+                        <div class="card-body">
+                            <ul>
+                                @foreach ($tema as $item)
+                                    <li><a href="/browsing/{{ $item['tema'] }}">{{ $item['tema'] }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <h5 class="card-header">Browsing - Surah Quran</h5>
+                        <div class="card-body">
+                            <ul>
+                                @foreach ($surah as $item)
+                                    <li><a href="/browsing/{{ $item['surah'] }}">{{ $item['surah'] }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <h5 class="card-header">Browsing - Golongan Quran</h5>
+                        <div class="card-body">
+                            <ul>
+                                @foreach ($golongan as $item)
+                                    <li><a href="/browsing/{{ $item['golongan'] }}">{{ $item['golongan'] }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
