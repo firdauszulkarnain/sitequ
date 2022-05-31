@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/searching" class="nav-link">
+                    <a href="/searching" class="nav-link {{ Request::is('searching*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-search"></i>
                         <p>
                             Searching
