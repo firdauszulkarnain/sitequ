@@ -12,29 +12,29 @@
 
         <section class="content">
             <div class="row">
-                @foreach ($result as $item)
-                    <div class="col-lg-2">
-                        <div class="card shadow-sm rounded ">
-                            <div class="card-body">
-                                <a class="text-decoration-none text-dark font-weight-bolder">{{ $item['surah'] }}</a>
-                                <a href="/surah/detail/{{ $item['surah'] }}"
-                                    class="btn btn-sm btn-info float-right rounded-circle shadow-sm rounded"><i
-                                        class="fas fa-search"></i></a>
+                <div class="col-lg-12">
+                    <div class="card mb-5">
+                        <div class="card-header bg-info">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <a href="/browsing" class="btn btn-sm btn-danger font-weight-bolder px-3"> <i
+                                            class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
+                                </div>
+                                <div class="col-lg-10">
+                                    <strong class="mt-1 float-right text-uppercase">{{ $header }}</strong>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-                <div class="col-lg-12">
-                    {{-- {{ $result->links() }} --}}
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4>Hasil Query</h4>
-                            <p>{{ $query }}</p>
+                        <div class="card-body pb-4">
+                            <div class="row mt-n2">
+                                @foreach ($result as $item)
+                                    <div class="col-lg-2 mb-2">
+                                        <a href="/surah/detail/{{ $item['surah'] }}"
+                                            class="badge badge-light border border-secondary px-3 py-2 mt-3 ml-1 "
+                                            style="font-size: 15px !important;  width: 100%">{{ $item['surah'] }}</a>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>

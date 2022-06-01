@@ -64,15 +64,24 @@
                         <div class="card-header bg-secondary font-weight-bolder">
                             HASIL PENCARIAN
                         </div>
-                        @if ($surah != 0)
-                            <div class="card-body">
+
+                        <div class="card-body">
+                            @if ($info == 1)
+                                <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                    <strong>Tidak Ada Surah Yang Ditemukan</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+                            @if ($surah != 0)
                                 @foreach ($surah as $item)
                                     <a href="/browsing/surah/{{ $item['url'] }}"
                                         class="badge badge-light border border-secondary px-3 py-2 mt-3 ml-1 "
                                         style="font-size: 15px !important;">{{ $item['surah'] }}</a>
                                 @endforeach
-                            </div>
-                        @endif
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

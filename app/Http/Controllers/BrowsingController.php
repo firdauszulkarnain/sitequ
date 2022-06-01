@@ -68,17 +68,23 @@ class BrowsingController extends Controller
         return view('browsing', $data);
     }
 
-    public function browsing($kategori, $keyword)
+    public function browsing($kategori, $keyword, Request $request)
     {
         if ($kategori == 'juz') {
+            // BUAT SPASI JUZ
+            $pecah = substr($keyword, 0, 3);
+            $akhir = strlen($keyword) - strlen($pecah);
+            $angka = substr($keyword, -$akhir);
+            $kata = $pecah . ' ' . $angka;
+
             $query = "SELECT * WHERE { quran:$keyword quran:MengandungSurah ?surah .}";
-            $title = ' - Kategori Juz - ' . $keyword;
+            $title = 'Kategori Juz - ' . $kata;
         } elseif ($kategori == 'tema') {
             $query = "SELECT ?surah WHERE {?surah quran:MengandungTema quran:$keyword}";
-            $title = ' - Kategori Tema - ' . $keyword;
+            $title = 'Kategori Tema - ' . $keyword;
         } elseif ($kategori == 'golongan') {
             $query = "SELECT ?surah WHERE {?surah quran:TermasukGolonganSurah quran:$keyword}";
-            $title = ' - Kategori Golongan - ' . $keyword;
+            $title = 'Kategori Golongan - ' . $keyword;
         }
 
         $result = $this->sparql->query($query);
@@ -93,11 +99,12 @@ class BrowsingController extends Controller
 
 
         $data = [
-            'title' => 'Browsing Result' . $title,
+            'title' => 'Browsing Result',
+            'header' => $title,
             'result' => $dataResult,
             'query' => $query,
         ];
-
+        $request->session()->now('message', $query);
         return view('browsing_result', $data);
     }
 }

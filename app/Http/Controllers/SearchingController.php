@@ -19,7 +19,7 @@ class SearchingController extends Controller
         $dataTema = [];
         $dataGolongan = [];
         $dataSurah = [];
-
+        $cek = 0;
         foreach ($resultJuz as $row) {
             $data = $this->result($row->juz->getUri());
             $title = substr($data, 0, 3);
@@ -71,8 +71,11 @@ class SearchingController extends Controller
                     'surah' => str_replace('_', ' ', $surah),
                 ]);
             }
+            if ($dataSurah == NULL) {
+                $cek = 1;
+            }
+            $request->session()->now('message', $query);
         }
-
 
         $data = [
             'title' => 'Searching',
@@ -81,6 +84,7 @@ class SearchingController extends Controller
             'tema' => $dataTema,
             'golongan' => $dataGolongan,
             'surah' => $dataSurah,
+            'info' => $cek,
         ];
 
         return view('searching', $data);

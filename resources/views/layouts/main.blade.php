@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
     <!-- SELECTPICKER -->
     <link rel="stylesheet" href="/css/bootstrap-select/bootstrap-select.css">
+    <link rel="stylesheet" href="/plugins/toastr/toastr.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/css/adminlte.min.css">
 </head>
@@ -47,8 +48,21 @@
     <!-- SELECT PICKER -->
     <script src="/js/bootstrap-select/bootstrap-select.js"></script>
     <script src="/js/select/defaults-id_ID.min.js"></script>
+    <script src="/plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/js/adminlte.min.js"></script>
+
+    <script>
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
+                "showIcon": false,
+            }
+            toastr.info("{{ session('message') }}");
+        @endif
+    </script>
 </body>
 
 </html>
