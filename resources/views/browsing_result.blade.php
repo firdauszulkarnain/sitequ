@@ -24,6 +24,9 @@
                         </div>
                     </div>
                 @endforeach
+                <div class="col-lg-12">
+                    {{-- {{ $result->links() }} --}}
+                </div>
             </div>
 
             <div class="row">

@@ -49,7 +49,20 @@ class SearchingController extends Controller
 
 
         if ($request->isMethod('POST')) {
-            $query = "SELECT * WHERE {?surah quran:MengandungTema quran:$request->tema}";
+            $query = 'SELECT * WHERE {';
+            if ($request->juz) {
+                $query = $query . "quran:$request->juz quran:MengandungSurah ?surah .";
+            }
+
+            if ($request->tema) {
+                $query = $query . "?surah quran:MengandungTema quran:$request->tema .";
+            }
+
+            if ($request->golongan) {
+                $query =  $query . "?surah quran:TermasukGolonganSurah quran:$request->golongan .";
+            }
+
+            $query = $query . '}';
             $resultSearch = $this->sparql->query($query);
             foreach ($resultSearch as $row) {
                 $surah = $this->result($row->surah->getUri());

@@ -90,6 +90,8 @@ class BrowsingController extends Controller
             ]);
         }
 
+
+
         $data = [
             'title' => 'Browsing Result' . $title,
             'result' => $dataResult,
