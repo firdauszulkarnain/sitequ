@@ -25,25 +25,30 @@ class BrowsingController extends Controller
 
         foreach ($resultJuz as $row) {
             $data = $this->result($row->juz->getUri());
-            // $title = substr($data, 0, 3);
-            // $akhir = strlen($data) - strlen($title);
-            // $angka = substr($data, -$akhir);
-            // $susun = $title . ' ' . $angka;
+            $title = substr($data, 0, 3);
+            $akhir = strlen($data) - strlen($title);
+            $angka = substr($data, -$akhir);
+            $susun = $title . ' ' . $angka;
             array_push($dataJuz, [
-                'juz' => $data
+                'url' => $data,
+                'juz' => $susun
             ]);
         }
 
         foreach ($resultSurah as $row) {
+            $surah = $this->result($row->surah->getUri());
             array_push($dataSurah, [
-                'surah' => $this->result($row->surah->getUri()),
+                'url' => $surah,
+                'surah' => str_replace('_', ' ', $surah),
             ]);
         }
 
 
         foreach ($resultTema as $row) {
+            $tema =  $this->result($row->tema->getUri());
             array_push($dataTema, [
-                'tema' => $this->result($row->tema->getUri()),
+                'url' => $tema,
+                'tema' => str_replace('_', ' ', $tema),
             ]);
         }
 

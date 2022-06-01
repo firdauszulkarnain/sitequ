@@ -19,7 +19,7 @@
                         </div>
                         <div class="card-body">
                             @foreach ($juz as $item)
-                                <a href="/browsing/juz/{{ $item['juz'] }}"
+                                <a href="/browsing/juz/{{ $item['url'] }}"
                                     class="badge badge-light border border-secondary px-3 py-2 mt-3 ml-1"
                                     style="font-size: 15px !important;">{{ $item['juz'] }}</a>
                             @endforeach
@@ -35,8 +35,8 @@
                         </div>
                         <div class="card-body">
                             @foreach ($tema as $item)
-                                <a href="/browsing/tema/{{ $item['tema'] }}"
-                                    class="badge badge-light border border-secondary px-3 py-2 mt-3 ml-1"
+                                <a href="/browsing/tema/{{ $item['url'] }}"
+                                    class="badge badge-light border border-secondary px-3 py-2 mt-3 ml-1 text-capitalize"
                                     style="font-size: 15px !important;">{{ $item['tema'] }}</a>
                             @endforeach
                         </div>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="card-body ">
                             @foreach ($surah as $item)
-                                <a href="/browsing/surah/{{ $item['surah'] }}"
+                                <a href="/browsing/surah/{{ $item['url'] }}"
                                     class="badge badge-light border border-secondary px-3 py-2 mt-3 ml-1 "
                                     style="font-size: 15px !important;">{{ $item['surah'] }}</a>
                             @endforeach

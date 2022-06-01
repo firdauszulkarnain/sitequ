@@ -23,6 +23,7 @@ Route::get('/browsing', [BrowsingController::class, 'index']);
 Route::get('/browsing/{name}/{any}', [BrowsingController::class, 'browsing']);
 Route::get('/surah/detail/{any}', [SurahController::class, 'detail']);
 Route::get('/searching', [SearchingController::class, 'index']);
+Route::post('/searching', [SearchingController::class, 'index']);
 
 Route::get('/kuesioner', function () {
     return view('kuesioner');
