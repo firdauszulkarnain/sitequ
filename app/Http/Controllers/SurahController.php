@@ -6,17 +6,14 @@ use Illuminate\Http\Request;
 
 class SurahController extends Controller
 {
-    public function detail($name)
+    public function detail($name, Request $request)
     {
-        $query = "SELECT * WHERE 
-        { 
-        quran:$name quran:MengandungTema ?tema .
-        quran:$name quran:TermasukGolonganSurah ?golongan .
-        quran:$name quran:MengandungArtiSurah ?arti .
-        }";
+        $query = "SELECT * WHERE { ?juz quran:MengandungSurah  quran:$name . quran:$name quran:MengandungTema ?tema . quran:$name quran:TermasukGolonganSurah ?golongan . quran:$name quran:MengandungArtiSurah ?arti . }";
+        $request->session()->now('message', $query);
         $queryAyat = "SELECT * WHERE {quran:$name quran:MengandungAyat ?ayat.}";
         $resultDetail = $this->sparql->query($query);
         $ayat = $this->sparql->query($queryAyat);
+        $dataJuz = [];
         $dataGolongan = [];
         $dataTema = [];
         $dataArtiSurah = [];
@@ -25,6 +22,19 @@ class SurahController extends Controller
         $kalimat = '';
 
         foreach ($resultDetail as $row) {
+
+            // JUZ
+            if (!is_numeric(array_search($this->result($row->juz->getUri()), array_column($dataJuz, "url")))) {
+                $data = $this->result($row->juz->getUri());
+                $title = substr($data, 0, 3);
+                $akhir = strlen($data) - strlen($title);
+                $angka = substr($data, -$akhir);
+                $susun = $title . ' ' . $angka;
+                array_push($dataJuz, [
+                    'url' => $this->result($row->juz->getUri()),
+                    'juz' => $susun,
+                ]);
+            }
 
             // TEMA
             if (!is_numeric(array_search($this->result($row->tema->getUri()), array_column($dataTema, "tema")))) {
@@ -69,6 +79,9 @@ class SurahController extends Controller
                     if ($kata == $nomorAkhir) {
                         $kalimat = preg_replace("/$nomorAkhir/", "", $kalimat);
                         $dataAyat[] = $kalimat;
+                        if (count($dataAyat) == 5) {
+                            break;
+                        }
                         $kalimat = '';
                         $j++;
                     }
@@ -82,8 +95,10 @@ class SurahController extends Controller
             'tema' => $dataTema,
             'golongan' => $dataGolongan,
             'arti' => $dataArtiSurah,
-            'ayat' => $dataAyat
+            'ayat' => $dataAyat,
+            'juz' => $dataJuz
         ];
+
 
         return view('detail', $data);
     }
