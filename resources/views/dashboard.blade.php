@@ -16,8 +16,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h2 class="font-wight-bolder">BROWSING</h2>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque,
-                                quibusdam.</p>
+                            <p class="card-text">Jelajahi surah-surah Al-Quran dalam tiap Kategori yang ada </p>
                             <a href="#" class="btn btn-primary float-right">Klik Disini!</a>
                         </div>
                     </div>

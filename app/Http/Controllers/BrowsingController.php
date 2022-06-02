@@ -70,7 +70,20 @@ class BrowsingController extends Controller
 
     public function browsing($kategori, $keyword, Request $request)
     {
+        $arrayCek = [];
         if ($kategori == 'juz') {
+            // CEK JUZ URL
+            $queryCek = "SELECT * WHERE {?cek a quran:Juz .}";
+            $cek  = $this->sparql->query($queryCek);
+            foreach ($cek as $row) {
+                $arrayCek[] = $this->result($row->cek->getUri());
+            }
+
+            if (!in_array($keyword, $arrayCek)) {
+                abort(404);
+            }
+            // END CEK
+
             // BUAT SPASI JUZ
             $pecah = substr($keyword, 0, 3);
             $akhir = strlen($keyword) - strlen($pecah);
@@ -80,11 +93,39 @@ class BrowsingController extends Controller
             $query = "SELECT * WHERE { quran:$keyword quran:MengandungSurah ?surah .}";
             $title = 'Kategori Juz - ' . $kata;
         } elseif ($kategori == 'tema') {
+
+            // CEK TEMA URL
+            $queryCek = "SELECT * WHERE {?cek a quran:Tema .}";
+            $cek  = $this->sparql->query($queryCek);
+            foreach ($cek as $row) {
+                $arrayCek[] = $this->result($row->cek->getUri());
+            }
+
+            if (!in_array($keyword, $arrayCek)) {
+                abort(404);
+            }
+            // END CEK
+
             $query = "SELECT ?surah WHERE {?surah quran:MengandungTema quran:$keyword}";
             $title = 'Kategori Tema - ' . $keyword;
         } elseif ($kategori == 'golongan') {
+
+            // CEK GOLONGAN
+            $queryCek = "SELECT * WHERE {?cek a quran:GolonganSurah .}";
+            $cek  = $this->sparql->query($queryCek);
+            foreach ($cek as $row) {
+                $arrayCek[] = $this->result($row->cek->getUri());
+            }
+
+            if (!in_array($keyword, $arrayCek)) {
+                abort(404);
+            }
+            // END CEK
+
             $query = "SELECT ?surah WHERE {?surah quran:TermasukGolonganSurah quran:$keyword}";
             $title = 'Kategori Golongan - ' . $keyword;
+        } else {
+            abort(404);
         }
 
         $result = $this->sparql->query($query);

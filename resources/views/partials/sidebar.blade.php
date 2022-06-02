@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link {{ Request::is('kriteria*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
                             Kriteria
@@ -34,21 +34,31 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/kriteria/juz"
+                                class="nav-link {{ Request::is('kriteria/juz*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Juz</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/kriteria/surah"
+                                class="nav-link {{ Request::is('kriteria/surah*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Surah</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/kriteria/tema"
+                                class="nav-link  {{ Request::is('kriteria/tema*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tema</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/kriteria/golongan"
+                                class="nav-link  {{ Request::is('kriteria/golongan*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Golongan</p>
                             </a>
                         </li>
                     </ul>

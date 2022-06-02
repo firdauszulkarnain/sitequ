@@ -13,4 +13,12 @@ class DashboardController extends Controller
         ];
         return view('dashboard', $data);
     }
+
+    public function about()
+    {
+        $data = [
+            'title' => 'About'
+        ];
+        return view('about', $data);
+    }
 }
