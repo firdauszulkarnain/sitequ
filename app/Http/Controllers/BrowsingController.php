@@ -37,9 +37,11 @@ class BrowsingController extends Controller
 
         foreach ($resultSurah as $row) {
             $surah = $this->result($row->surah->getUri());
+            $nama_surah =  str_replace('_', ' ', $surah);
+            $nama_surah = str_replace("'", "", $nama_surah);
             array_push($dataSurah, [
                 'url' => $surah,
-                'surah' => str_replace('_', ' ', $surah),
+                'surah' => $nama_surah,
             ]);
         }
 
@@ -132,8 +134,12 @@ class BrowsingController extends Controller
         $dataResult = [];
 
         foreach ($result as $row) {
+            $surah = $this->result($row->surah->getUri());
+            $nama_surah =  str_replace('_', ' ', $surah);
+            $nama_surah = str_replace("'", "", $nama_surah);
             array_push($dataResult, [
-                'surah' => $this->result($row->surah->getUri()),
+                'url' => $surah,
+                'surah' => $nama_surah,
             ]);
         }
 

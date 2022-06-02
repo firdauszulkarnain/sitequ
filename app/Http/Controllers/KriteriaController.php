@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class KriteriaController extends Controller
 {
-    public function index($name)
+    public function index(Request $request, $name)
     {
         $dataResult = [];
         if ($name == 'juz') {
@@ -54,15 +54,17 @@ class KriteriaController extends Controller
 
             foreach ($result as $row) {
                 $surah = $this->result($row->surah->getUri());
+                $nama_surah =  str_replace('_', ' ', $surah);
+                $nama_surah = str_replace("'", "", $nama_surah);
                 array_push($dataResult, [
                     'url' => $surah,
-                    'name' => str_replace('_', ' ', $surah),
+                    'name' => $nama_surah,
                 ]);
             }
         } else {
             abort(404);
         }
-
+        $request->session()->now('message', $query);
         $data = [
             'title' => 'Kriteria - ' . $name,
             'kriteria' => $name,

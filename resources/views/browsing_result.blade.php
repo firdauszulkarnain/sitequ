@@ -29,7 +29,7 @@
                             <div class="row mt-n2">
                                 @foreach ($result as $item)
                                     <div class="col-lg-2 mb-2">
-                                        <a href="/surah/detail/{{ $item['surah'] }}"
+                                        <a href="/surah/detail/{{ $item['url'] }}"
                                             class="badge badge-light border border-secondary px-3 py-2 mt-3 ml-1 "
                                             style="font-size: 15px !important;  width: 100%">{{ $item['surah'] }}</a>
                                     </div>
