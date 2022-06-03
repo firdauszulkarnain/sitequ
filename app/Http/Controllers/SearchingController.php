@@ -16,19 +16,26 @@ class SearchingController extends Controller
         $resultGolongan = $this->sparql->query($queryGolongan);
 
         $dataJuz = [];
+        $angkaJuz = [];
         $dataTema = [];
         $dataGolongan = [];
         $dataSurah = [];
         $cek = 0;
+        $hasil = '';
+
         foreach ($resultJuz as $row) {
             $data = $this->result($row->juz->getUri());
             $title = substr($data, 0, 3);
             $akhir = strlen($data) - strlen($title);
-            $angka = substr($data, -$akhir);
-            $susun = $title . ' ' . $angka;
+            $angka = (int)substr($data, -$akhir);
+            $angkaJuz[] = $angka;
+        }
+
+        asort($angkaJuz);
+        foreach ($angkaJuz as $row) {
             array_push($dataJuz, [
-                'nilai' => $data,
-                'juz' => $susun
+                'nilai' => 'Juz' . $row,
+                'juz' => 'Juz ' . $row
             ]);
         }
 
@@ -49,17 +56,42 @@ class SearchingController extends Controller
 
 
         if ($request->isMethod('POST')) {
+            $i = 0;
             $query = 'SELECT * WHERE {';
             if ($request->juz) {
                 $query = $query . "quran:$request->juz quran:MengandungSurah ?surah .";
+                $title = substr($request->juz, 0, 3);
+                $akhir = strlen($request->juz) - strlen($title);
+                $angka = (int)substr($request->juz, -$akhir);
+                $juz = $title . ' ' . $angka;
+
+                // BUAT TITLE
+                $hasil = $hasil . 'Juz: ' . $juz;
+                $i = 1;
             }
 
             if ($request->tema) {
                 $query = $query . "?surah quran:MengandungTema quran:$request->tema .";
+                $tema = str_replace('_', ' ', $request->tema);
+
+                // BUAT TITLE
+                if ($i == 1) {
+                    $hasil = $hasil . ' - Tema: ' . $tema;
+                } else {
+                    $hasil = $hasil . 'Tema: ' . $tema;
+                    $i = 1;
+                }
             }
 
             if ($request->golongan) {
                 $query =  $query . "?surah quran:TermasukGolonganSurah quran:$request->golongan .";
+
+                // BUAT TITLE
+                if ($i >= 1) {
+                    $hasil = $hasil . ' - Golongan: ' . $request->golongan;
+                } else {
+                    $hasil = $hasil . 'Golongan: ' . $request->golongan;
+                }
             }
 
             $query = $query . '}';
@@ -77,6 +109,7 @@ class SearchingController extends Controller
             $request->session()->now('message', $query);
         }
 
+
         $data = [
             'title' => 'Searching',
             'juz' => $dataJuz,
@@ -85,6 +118,7 @@ class SearchingController extends Controller
             'golongan' => $dataGolongan,
             'surah' => $dataSurah,
             'info' => $cek,
+            'hasil' => $hasil,
         ];
 
         return view('searching', $data);

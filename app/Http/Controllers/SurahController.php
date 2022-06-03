@@ -58,7 +58,7 @@ class SurahController extends Controller
                 ]);
             }
 
-            // Ayat
+            // AYAT
             $ayat = $this->result($row->ayat->getValue());
 
             // TOTAL AYAT
