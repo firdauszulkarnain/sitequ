@@ -13,7 +13,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-11">
                     <div class="card pb-3">
-                        <div class="card-header bg-primary font-weight-bolder text-center text-uppercase"
+                        <div class="card-header bg-info font-weight-bolder text-center text-uppercase"
                             style="font-size: 18px !important;">
                             {{ $title }}
                         </div>

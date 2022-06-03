@@ -69,12 +69,16 @@ class KriteriaController extends Controller
         } else {
             abort(404);
         }
+
         $request->session()->now('message', $query);
+
         $data = [
             'title' => 'Kriteria - ' . $name,
             'kriteria' => $name,
             'data' => $dataResult,
         ];
+
+
         return view('kriteria', $data);
     }
 

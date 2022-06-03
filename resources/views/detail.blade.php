@@ -12,7 +12,7 @@
 
         <section class="content">
             <div class="row d-flex justify-content-center">
-                <div class="col-lg-11">
+                <div class="col-lg-12">
                     <div class="card mb-5 pb-3">
                         <div class="card-body">
                             <div class="row">
@@ -32,9 +32,21 @@
                                             $i++;
                                         @endphp
                                     @endforeach
-                                    <button class="btn btn-sm btn-primary px-3 py-2">Lanjut Baca Ayat...</button>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <a href="/surah/detail-ayat/{{ $surah }}"
+                                                class="btn btn-sm btn-light bg-secondary px-3 py-2">Lanjut Baca
+                                                Ayat...</a>
+                                        </div>
+                                        <div class="col-lg-8 mt-2">
+                                            <small style="font-size: 16px" class="font-weight-bolder float-right">Total
+                                                {{ $total_ayat }}
+                                                Jumlah Ayat</small>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="col-lg-5 mt-2">
+                                <div class="col-lg-5 mt-2 pr-4">
                                     <label for="" class="mb-n3"><i class="fas fa-thumbtack"></i> JUZ SURAH</label>
                                     <div class="row">
                                         @foreach ($juz as $item)

@@ -50,7 +50,9 @@
                                     </div>
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-2 mt-2">
-                                        <button class="btn btn-info mt-4 float-right px-4">Search</button>
+                                        <button class="btn btn-info mt-4 float-right px-4"><i
+                                                class="fas fa-fw fa-search"></i>
+                                            Search</button>
                                     </div>
                                 </div>
                             </form>

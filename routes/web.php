@@ -28,6 +28,7 @@ Route::get('/browsing/{name}/{any}', [BrowsingController::class, 'browsing']);
 
 // DETAIL SURAH
 Route::get('/surah/detail/{any}', [SurahController::class, 'detail']);
+Route::get('/surah/detail-ayat/{name}', [SurahController::class, 'detail_ayat']);
 
 // SEARCHING
 Route::get('/searching', [SearchingController::class, 'index']);
