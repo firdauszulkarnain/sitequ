@@ -22,23 +22,28 @@ class BrowsingController extends Controller
         $dataSurah = [];
         $dataTema = [];
         $dataGolongan = [];
+        $angkaJuz = [];
 
         foreach ($resultJuz as $row) {
             $data = $this->result($row->juz->getUri());
             $title = substr($data, 0, 3);
             $akhir = strlen($data) - strlen($title);
-            $angka = substr($data, -$akhir);
-            $susun = $title . ' ' . $angka;
+            $angka = (int)substr($data, -$akhir);
+            $angkaJuz[] = $angka;
+        }
+
+        asort($angkaJuz);
+        foreach ($angkaJuz as $row) {
             array_push($dataJuz, [
-                'url' => $data,
-                'juz' => $susun
+                'url' => 'Juz' . $row,
+                'juz' => 'Juz ' . $row
             ]);
         }
 
         foreach ($resultSurah as $row) {
             $surah = $this->result($row->surah->getUri());
-            $nama_surah =  str_replace('_', ' ', $surah);
-            $nama_surah = str_replace("'", "", $nama_surah);
+            $string =  str_replace('_', ' ', $surah);
+            $nama_surah = str_replace("'", "", $string);
             array_push($dataSurah, [
                 'url' => $surah,
                 'surah' => $nama_surah,

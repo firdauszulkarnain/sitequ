@@ -20,7 +20,7 @@
                         <div class="card-body">
                             <div class="row mt-n2">
                                 @foreach ($juz as $item)
-                                    <div class="col-lg-1">
+                                    <div class="col-lg-2">
                                         <a href="/browsing/juz/{{ $item['url'] }}"
                                             class="badge badge-light border border-secondary px-3 py-2 mt-3 ml-1"
                                             style="font-size: 15px !important; width: 100%">{{ $item['juz'] }}</a>

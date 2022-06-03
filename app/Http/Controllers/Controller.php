@@ -22,7 +22,7 @@ class Controller extends BaseController
         RdfNamespace::set('owl', 'http://www.w3.org/2002/07/owl#');
         RdfNamespace::set('quran', 'http://www.semanticweb.org/Quran#');
 
-        $this->sparql = new Client('http://localhost:3030/quran/query');
+        $this->sparql = new Client('http://localhost:3030/sitequ/query');
     }
 
     public function result($string)

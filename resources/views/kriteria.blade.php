@@ -26,7 +26,7 @@
                                                 class="badge badge-light border border-secondary px-3 py-2 mt-3 ml-1"
                                                 style="font-size: 15px !important; width: 100%">{{ $item['name'] }}</a>
                                         @else
-                                            <a href="/browsing/{{ $kriteria }}/{{ $item['url'] }}"
+                                            <a href="/kriteria/{{ $kriteria }}/{{ $item['url'] }}"
                                                 class="badge badge-light border border-secondary px-3 py-2 mt-3 ml-1"
                                                 style="font-size: 15px !important; width: 100%">{{ $item['name'] }}</a>
                                         @endif

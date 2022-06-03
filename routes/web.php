@@ -35,6 +35,7 @@ Route::post('/searching', [SearchingController::class, 'index']);
 
 // KRITERIA
 Route::get('/kriteria/{name}', [KriteriaController::class, 'index']);
+Route::get('/kriteria/{name}/{any}', [KriteriaController::class, 'kriteria_result']);
 
 Route::get('/kuesioner', function () {
     return view('kuesioner');
