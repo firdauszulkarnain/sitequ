@@ -37,9 +37,10 @@ class SurahController extends Controller
             }
 
             // TEMA
-            if (!is_numeric(array_search($this->result($row->tema->getUri()), array_column($dataTema, "tema")))) {
+            if (!is_numeric(array_search($this->result($row->tema->getUri()), array_column($dataTema, "cek")))) {
                 array_push($dataTema, [
-                    'tema' => $this->result($row->tema->getUri()),
+                    'cek' =>  $this->result($row->tema->getUri()),
+                    'tema' =>  str_replace('_', ' ', $this->result($row->tema->getUri())),
                 ]);
             }
 
@@ -57,9 +58,10 @@ class SurahController extends Controller
             }
 
             // ARTI
-            if (!is_numeric(array_search($this->result($row->arti->getUri()), array_column($dataArtiSurah, "arti")))) {
+            if (!is_numeric(array_search($this->result($row->arti->getUri()), array_column($dataArtiSurah, "cek")))) {
                 array_push($dataArtiSurah, [
-                    'arti' => $this->result($row->arti->getUri()),
+                    'cek' => $this->result($row->arti->getUri()),
+                    'arti' =>  str_replace('_', ' ', $this->result($row->arti->getUri())),
                 ]);
             }
         }
