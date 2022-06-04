@@ -82,13 +82,8 @@
                             <div class="row">
                                 @if ($info == 1)
                                     <div class="col-lg-12">
-                                        <div class="alert alert-danger alert-dismissible fade show text-center"
-                                            role="alert">
-                                            <strong>Tidak Ada Surah Yang Ditemukan</strong>
-                                            <button type="button" class="close" data-dismiss="alert"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                        <div class="alert alert-danger text-center" role="alert">
+                                            <strong>Tidak Ada Surah Yang Ditemukan!</strong>
                                         </div>
                                     </div>
                                 @endif

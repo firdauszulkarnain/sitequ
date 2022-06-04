@@ -14,10 +14,12 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
+                        <img src="/img/gambar1.jpg" class="card-img-top" alt="..." style="max-height: 200px !important;">
                         <div class="card-body">
                             <h2 class="font-wight-bolder">BROWSING</h2>
-                            <p class="card-text">Jelajahi surah-surah Al-Quran dalam tiap Kategori yang ada </p>
-                            <a href="#" class="btn btn-primary float-right">Klik Disini!</a>
+                            <p class="card-text">Jelajahi surah-surah Al-Quran dalam tiap Kategori yang ada
+                            </p>
+                            <a href="/browsing" class="btn btn-primary float-right">Klik Disini!</a>
                         </div>
                     </div>
                 </div>
