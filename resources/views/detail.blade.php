@@ -75,7 +75,7 @@
                                     <div class="row">
                                         @foreach ($golongan as $item)
                                             <div class="col-lg-4 mt-3">
-                                                <a href="/browsing/tema/{{ $item['golongan'] }}"
+                                                <a href="/browsing/golongan/{{ $item['golongan'] }}"
                                                     class="badge badge-info border border-secondary py-2"
                                                     style="font-size: 15px !important; width: 100% !important">{{ $item['golongan'] }}</a>
                                             </div>

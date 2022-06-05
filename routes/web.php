@@ -39,5 +39,7 @@ Route::get('/kriteria/{name}', [KriteriaController::class, 'index']);
 Route::get('/kriteria/{name}/{any}', [KriteriaController::class, 'kriteria_result']);
 
 Route::get('/kuesioner', function () {
-    return view('kuesioner');
+    return view('kuesioner', [
+        'title' => 'Kuesioner'
+    ]);
 });

@@ -23,12 +23,12 @@
                                 </div>
                                 <div class="col-lg-8">
                                     <small class="float-right font-weight-bolder"
-                                        style="font-size: 18px !important;">{{ $title }}</small>
+                                        style="font-size: 18px !important;">{{ str_replace('_', ' ', $title) }}</small>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body px-5">
-                            <h2 class="text-center mt-2"><b>ARTI AYAT SURAH {{ $surah }}</b></h2>
+                            <h2 class="text-center mt-2"><b>ARTI AYAT SURAH {{ str_replace('_', ' ', $surah) }}</b></h2>
                             <hr class="mb-4">
                             @php
                                 $i = 1;
