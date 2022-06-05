@@ -62,7 +62,7 @@
                                     <div class="row">
                                         @foreach ($tema as $item)
                                             <div class="col-lg-4 mt-3">
-                                                <a href="/browsing/tema/{{ $item['tema'] }}"
+                                                <a href="/browsing/tema/{{ $item['url'] }}"
                                                     class="badge badge-info border border-secondary py-2"
                                                     style="font-size: 15px !important; width: 100% !important">{{ $item['tema'] }}</a>
                                             </div>

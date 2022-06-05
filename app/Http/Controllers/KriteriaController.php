@@ -32,15 +32,18 @@ class KriteriaController extends Controller
             }
         } elseif ($name == 'tema') {
 
-            $query = "SELECT ?tema WHERE { ?tema a quran:Tema .}";
+            // $query = "SELECT ?tema WHERE { ?tema a quran:Tema .}";
+            $query = "SELECT ?tema WHERE { ?surah quran:MengandungTema ?tema .}";
             $result = $this->sparql->query($query);
 
             foreach ($result as $row) {
                 $tema =  $this->result($row->tema->getUri());
-                array_push($dataResult, [
-                    'url' => $tema,
-                    'name' => str_replace('_', ' ', $tema),
-                ]);
+                if (!is_numeric(array_search($tema, array_column($dataResult, "url")))) {
+                    array_push($dataResult, [
+                        'url' => $tema,
+                        'name' => str_replace('_', ' ', $tema),
+                    ]);
+                }
             }
         } elseif ($name == 'golongan') {
             $query = "SELECT ?golongan WHERE { ?golongan a quran:GolonganSurah .}";
@@ -66,7 +69,11 @@ class KriteriaController extends Controller
                     'name' => $nama_surah,
                 ]);
             }
-        } else {
+        }
+
+
+        // JIKA NAME BUKAN JUZ, TEMA, Golongan, Surah, Tampilkan Not Found
+        else {
             abort(404);
         }
 
@@ -109,10 +116,14 @@ class KriteriaController extends Controller
         } elseif ($kategori == 'tema') {
 
             // CEK TEMA URL
-            $queryCek = "SELECT * WHERE {?cek a quran:Tema .}";
+            // $queryCek = "SELECT * WHERE {?cek a quran:Tema .}";
+            $queryCek = "SELECT ?cek WHERE { ?surah quran:MengandungTema ?cek .}";
             $cek  = $this->sparql->query($queryCek);
             foreach ($cek as $row) {
-                $arrayCek[] = $this->result($row->cek->getUri());
+                $tema = $this->result($row->cek->getUri());
+                if (!in_array($tema, $arrayCek)) {
+                    $arrayCek[] = $tema;
+                }
             }
 
             if (!in_array($keyword, $arrayCek)) {

@@ -9,7 +9,8 @@ class SearchingController extends Controller
     public function index(Request $request)
     {
         $queryJuz = "SELECT ?juz WHERE { ?juz a quran:Juz .}";
-        $queryTema = "SELECT ?tema WHERE { ?tema a quran:Tema .}";
+        // $queryTema = "SELECT ?tema WHERE { ?tema a quran:Tema .}";
+        $queryTema = "SELECT ?tema WHERE { ?surah quran:MengandungTema ?tema .}";
         $queryGolongan = "SELECT ?golongan WHERE { ?golongan a quran:GolonganSurah .}";
         $resultJuz = $this->sparql->query($queryJuz);
         $resultTema = $this->sparql->query($queryTema);
@@ -42,10 +43,12 @@ class SearchingController extends Controller
 
         foreach ($resultTema as $row) {
             $tema =  $this->result($row->tema->getUri());
-            array_push($dataTema, [
-                'nilai' => $tema,
-                'tema' => str_replace('_', ' ', $tema),
-            ]);
+            if (!is_numeric(array_search($tema, array_column($dataTema, "nilai")))) {
+                array_push($dataTema, [
+                    'nilai' => $tema,
+                    'tema' => str_replace('_', ' ', $tema),
+                ]);
+            }
         }
 
         foreach ($resultGolongan as $row) {

@@ -11,7 +11,8 @@ class BrowsingController extends Controller
 
         $queryJuz = "SELECT ?juz WHERE { ?juz a quran:Juz .}";
         $querySurah = "SELECT ?surah WHERE { ?surah a quran:Surah .}";
-        $queryTema = "SELECT ?tema WHERE { ?tema a quran:Tema .}";
+        // $queryTema = "SELECT ?tema WHERE { ?tema a quran:Tema .}";
+        $queryTema = "SELECT ?tema WHERE { ?surah quran:MengandungTema ?tema .}";
         $queryGolongan = "SELECT ?golongan WHERE { ?golongan a quran:GolonganSurah .}";
         $resultJuz = $this->sparql->query($queryJuz);
         $resultSurah = $this->sparql->query($querySurah);
@@ -53,10 +54,12 @@ class BrowsingController extends Controller
 
         foreach ($resultTema as $row) {
             $tema =  $this->result($row->tema->getUri());
-            array_push($dataTema, [
-                'url' => $tema,
-                'tema' => str_replace('_', ' ', $tema),
-            ]);
+            if (!is_numeric(array_search($tema, array_column($dataTema, "url")))) {
+                array_push($dataTema, [
+                    'url' => $tema,
+                    'tema' => str_replace('_', ' ', $tema),
+                ]);
+            }
         }
 
         foreach ($resultGolongan as $row) {
@@ -102,10 +105,14 @@ class BrowsingController extends Controller
         } elseif ($kategori == 'tema') {
 
             // CEK TEMA URL
-            $queryCek = "SELECT * WHERE {?cek a quran:Tema .}";
+            // $queryCek = "SELECT * WHERE {?tema a quran:Tema .}";
+            $queryCek = "SELECT ?cek WHERE { ?surah quran:MengandungTema ?cek .}";
             $cek  = $this->sparql->query($queryCek);
             foreach ($cek as $row) {
-                $arrayCek[] = $this->result($row->cek->getUri());
+                $tema = $this->result($row->cek->getUri());
+                if (!in_array($tema, $arrayCek)) {
+                    $arrayCek[] = $tema;
+                }
             }
 
             if (!in_array($keyword, $arrayCek)) {

@@ -36,9 +36,9 @@ class SurahController extends Controller
             }
 
             // TEMA
-            if (!is_numeric(array_search($this->result($row->tema->getUri()), array_column($dataTema, "cek")))) {
+            if (!is_numeric(array_search($this->result($row->tema->getUri()), array_column($dataTema, "url")))) {
                 array_push($dataTema, [
-                    'cek' =>  $this->result($row->tema->getUri()),
+                    'url' =>  $this->result($row->tema->getUri()),
                     'tema' =>  str_replace('_', ' ', $this->result($row->tema->getUri())),
                 ]);
             }
